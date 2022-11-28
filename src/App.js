@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import AuthContextProvider from "./contexts/AuthContextProvider";
 import BlogContextProvider from "./contexts/BlogContextProvider";
@@ -9,6 +10,7 @@ function App() {
       <AuthContextProvider>
         <BlogContextProvider>
           <AppRouter />
+          <ToastContainer/>
         </BlogContextProvider>
       </AuthContextProvider>
     </div>

@@ -17,6 +17,7 @@ import { logOut } from "../helpers/firebase";
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
+  localStorage.setItem("currentUser", currentUser.email);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
 
@@ -32,7 +33,7 @@ const Navbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <a href="/dashboard">
+          <a href="/">
             <Box
               component="img"
               href="/login"
@@ -50,7 +51,7 @@ const Navbar = () => {
           <Typography
             variant="h6"
             component="a"
-            href="/dashboard"
+            href="/"
             sx={{
               flexGrow: 1,
               textAlign: "center",

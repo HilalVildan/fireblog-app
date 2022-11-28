@@ -1,8 +1,14 @@
+import { Container } from '@mui/material'
 import React from 'react'
+import BlogCard from '../components/BlogCard'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+    <Container sx={{ mt:2}}>
+    <BlogCard/>
+    </Container>
+    </div>
   )
 }
 

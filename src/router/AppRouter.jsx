@@ -15,7 +15,7 @@ const AppRouter = () => {
    <Navbar />
        <Routes>
 
-           <Route exact path="/dashboard"  element={<Dashboard/>} />
+           <Route exact path="/"  element={<Dashboard/>} />
            <Route path="/register"  element={<Register/>} />
            <Route path="/login"  element={<Login/>} />
            <Route path="/newBlog"  element={<NewBlog/>} />

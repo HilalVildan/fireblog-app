@@ -1,42 +1,48 @@
-import React, { createContext, useEffect, useState } from 'react'
+import { getDatabase, onValue, ref } from "firebase/database";
+import React, { createContext, useState } from "react";
+
+import { useEffect } from "react";
 import app from "../helpers/firebase";
-import {getDatabase, onValue, ref} from "firebase/database"
-
-export const BlogContext = createContext();
 
 
 
+export const BlogContext = createContext({
+  cards:{},
+  setCards: () => {},
+ 
+  }
+);
 
-const BlogContextProvider = ({children}) => {
+const BlogContextProvider = ({ children }) => {
+  const [cards, setCards] = useState([]);
 
-  
-    const [cards, setCards] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-      const db = getDatabase(app);
-      const blogRef = ref(db, "blogcard/") 
+ 
+   useEffect(() => {
+     const db = getDatabase(app);
+     console.log(db);
+     const blogRef = ref(db, "blogcard/");
 
-      onValue(blogRef, (snapshot) => {
-          const data = snapshot.val();
-          const blogArray = [];
+     onValue(blogRef, (snapshot) => {
+       const data = snapshot.val();
+       const blogArray = [];
 
-          for (let id in data) {
-              blogArray.push({id, ...data[id]});
-          }
-          setCards(blogArray)
-          setIsLoading(false)
-      })
-    console.log(cards);
-    
-    }, []);
-    
+       for (let id in data) {
+         blogArray.push({ id, ...data[id] });
+       }
+       setCards(blogArray);
+       // setIsLoading(false);
+     });
+     console.log(cards);
+   }, []);
+ 
+
 
   return (
-    <BlogContext.Provider value={{isLoading, cards}}>
-{children}
+    <BlogContext.Provider value={{ cards, setCards }}>
+      {children}
     </BlogContext.Provider>
-  )
-}
+  );
+};
 
-export default BlogContextProvider
+export default BlogContextProvider;
